@@ -46,11 +46,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "A:\\Du_an\\D2D_simulation_V2\\D2D_simulation\\D2D_simulation.csproj",
+      "projectUniqueName": "A:\\Du_an\\D2D_simulation_V2\\D2D\\D2D_simulation\\D2D_simulation.csproj",
       "projectName": "D2D_simulation",
-      "projectPath": "A:\\Du_an\\D2D_simulation_V2\\D2D_simulation\\D2D_simulation.csproj",
+      "projectPath": "A:\\Du_an\\D2D_simulation_V2\\D2D\\D2D_simulation\\D2D_simulation.csproj",
       "packagesPath": "C:\\Users\\Simplify V2.DESKTOP-TMQD3R8\\.nuget\\packages\\",
-      "outputPath": "A:\\Du_an\\D2D_simulation_V2\\D2D_simulation\\obj\\",
+      "outputPath": "A:\\Du_an\\D2D_simulation_V2\\D2D\\D2D_simulation\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Simplify V2.DESKTOP-TMQD3R8\\AppData\\Roaming\\NuGet\\NuGet.Config",
