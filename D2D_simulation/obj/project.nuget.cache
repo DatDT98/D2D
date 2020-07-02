@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "QrAaEri5ICLfqjX9aJkT1P3eTzMyEtKpu+UvT8Y8LkOTOn8G8MTYIjf344ACvEFYNjnajBc1rTaBoHkwkWIkUw==",
+  "success": true,
+  "projectFilePath": "A:\\Du_an\\D2D_simulation_V2\\D2D_simulation\\D2D_simulation.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Simplify V2.DESKTOP-TMQD3R8\\.nuget\\packages\\mathnet.numerics\\4.11.0\\mathnet.numerics.4.11.0.nupkg.sha512"
+  ],
+  "logs": []
+}
