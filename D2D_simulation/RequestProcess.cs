@@ -25,6 +25,7 @@ namespace D2D_simulation
                     indexChannel = 0;
             }
         }
+        //Xu li becon request tai SBS
         public void processBeconReq(Request req)
         {
             for(int i=0; i < Input.NumberofSBS; i++)

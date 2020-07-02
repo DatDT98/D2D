@@ -105,6 +105,7 @@ namespace D2D_simulation
                 /* FileStream fs = new FileStream(path1, FileMode.Create);
                  StreamWriter sw1 = new StreamWriter(fs);
                  sw1.WriteLine(Input.NumberofSBS + " ");*/
+                //Khoi tao vi tri SBS va SUE
                 for (int i = 0; i < Input.NumberofSBS; i++)
                 {
                     Random rd = new Random(Guid.NewGuid().GetHashCode());
@@ -136,7 +137,6 @@ namespace D2D_simulation
                     new_SUE.UE_Id = ++Input.UE_Id;
                     Input.List_SBS.Add(new_SBS);
                     new_SBS.ListUE.Add(new_SUE);
-
                 }
                 //Cap BWP cho SBS
                 for(int i=0; i < Input.NumberofSBS; i++)
@@ -162,11 +162,6 @@ namespace D2D_simulation
                         Console.WriteLine("Id of BWP = " + Input.List_SBS[i].ListBWP[j].Id_BWP + " count=" + Input.List_SBS[i].ListBWP[j].Count);
                     }
 
-                }
-                Console.WriteLine("End");
-                for (int i = 0; i < Input.List_MBS[0].ListBWP.Count; i++)
-                {
-                    Console.WriteLine("Count=" + Input.List_MBS[0].ListBWP[i].Count);
                 }
                 //Khoi tao vi tri M-UE
                 for (int i = 0; i < Input.NumberofM_UE; i++)
@@ -200,7 +195,6 @@ namespace D2D_simulation
                     newUE.PowerTr = Input.Max_PowerTr;
                     Input.List_MBS[0].ListUE.Add(newUE);
                 }
-
                 //Khoi tao D2DPair
                 for (int i = 0; i < Input.NumberofPair; i++)
                 {
