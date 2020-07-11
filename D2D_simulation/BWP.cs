@@ -19,11 +19,23 @@ namespace D2D_simulation
             get { return id_BWP; }
             set { id_BWP = value; }
         }
+        private double pow_infer=0;
+        public double Pow_infer
+        {
+            get { return pow_infer; }
+            set { pow_infer = value; }
+        }
         private int count=0;
         public int Count
         {
             get { return count; }
             set { count = value; }
+        }
+        private bool active = false;
+        public bool Active
+        {
+            get { return active; }
+            set { active = value; }
         }
         //Copy object
         public object Clone()

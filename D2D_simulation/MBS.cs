@@ -24,17 +24,7 @@ namespace D2D_simulation
             get { return id_MBS; }
             set { id_MBS = value; }
         }
-        private List<Pair> listPair = new List<Pair>();
-        public List<Pair> ListPair
-        {
-            set { listPair = value; }
-            get { return listPair; }
-        }
-
-        public void AddPair(Pair p)
-        {
-            ListPair.Add(p);
-        }
+        
         private List<UE> listUE = new List<UE>();
         public List<UE> ListUE
         {

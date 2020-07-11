@@ -31,6 +31,12 @@ namespace D2D_simulation
             get { return _D2DmaxPower; }
             set { _D2DmaxPower = value; }
         }
+        private double limit_interference;
+        public double Limit_interference
+        {
+            get { return limit_interference; }
+            set { limit_interference = value; }
+        }
         private double _SUEmaxPower;
         public double SUE_MaxPower
         {
