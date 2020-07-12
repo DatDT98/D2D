@@ -4,7 +4,7 @@ using System.Text;
 
 namespace D2D_simulation
 {
-    class Channel
+    class Channel : ICloneable
     {
         public Channel() { }
         private int _channel_id;
@@ -49,10 +49,7 @@ namespace D2D_simulation
             set { listMUE = value; }
             get { return listMUE; }
         }
-        public void AddMUE(UE ue)
-        {
-            ListMUE.Add(ue);
-        }
+        
         private List<UE> list_device = new List<UE>();
         public List<UE> List_device
         {
@@ -72,6 +69,10 @@ namespace D2D_simulation
         public void AddSUE(UE ue)
         {
             ListSUE.Add(ue);
+        }
+        public object Clone()
+        {
+            return this.MemberwiseClone();
         }
     }
 }

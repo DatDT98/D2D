@@ -18,7 +18,7 @@ namespace D2D_simulation
                 {
                     Input.List_MBS[0].ListRequest[i].UE.channel_id = Input.List_MBS[0].ListChannel[indexChannel].channel_id;
                     //Add UE vao list channel tuong ung
-                    Input.List_MBS[0].ListChannel[indexChannel].AddMUE(Input.List_MBS[0].ListRequest[i].UE);
+                    Input.List_MBS[0].ListChannel[indexChannel].ListMUE.Add(Input.List_MBS[0].ListRequest[i].UE);
                     indexChannel++;
                 }
                 else
