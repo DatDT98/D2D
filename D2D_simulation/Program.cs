@@ -57,89 +57,209 @@ namespace D2D_simulation
                     indexBWP++;
                 }
             }
-            //Khoi tao SBS
-            for (int i = 0; i < Input.NumberofSBS; i++)
+
+            string path1 = Input.path + "\\list_device_in_system.txt";
+            if (System.IO.File.Exists(@path1) == true)
             {
-                Random rd = new Random(Guid.NewGuid().GetHashCode());
-                double x = 0, y = 0;
-                if (i % 4 == 0)
+                FileStream fs = new FileStream(path1, FileMode.Open);
+                StreamReader read1 = new StreamReader(fs);
+                int NumberOfMUE = Convert.ToInt32(read1.ReadLine());
+                Console.WriteLine(NumberOfMUE);
+                for (int i = 0; i < NumberOfMUE; i++)
                 {
-                    x = Input.List_MBS[0].Position.X / 2;
-                    y = Input.List_MBS[0].Position.Y / 2;
+                    UE newDv = new UE();
+                    int X = Convert.ToInt32(read1.ReadLine());
+                    int Y = Convert.ToInt32(read1.ReadLine());
+                    Position newpoint = new Position(X, Y, 0);
+                    newDv.UE_Id = ++Input.UE_Id;
+                    newDv.PowerTr = Input.Max_PowerTr;
+                    newDv.Position = newpoint;
+                    Input.List_MBS[0].ListUE.Add(newDv);
                 }
-                else if (i % 4 == 1)
+                int NumberOfSUE = Convert.ToInt32(read1.ReadLine());
+                Console.WriteLine(NumberOfSUE);
+                //Khoi tao SBS
+                for (int i = 0; i < Input.NumberofSBS; i++)
                 {
-                    x = Input.List_MBS[0].Position.X / 2 + Input.List_MBS[0].Position.X;
-                    y = Input.List_MBS[0].Position.Y / 2;
-                }
-                else if (i % 4 == 2)
-                {
-                    x = Input.List_MBS[0].Position.X / 2 + Input.List_MBS[0].Position.X;
-                    y = Input.List_MBS[0].Position.Y / 2 + Input.List_MBS[0].Position.Y;
-                }
-                else if (i % 4 == 3)
-                {
-                    x = Input.List_MBS[0].Position.X / 2;
-                    y = Input.List_MBS[0].Position.Y / 2 + Input.List_MBS[0].Position.Y;
-                }
-                SBS new_SBS = new SBS(x, y, 0);
-                //Tao SUE trong vung phu cua SBS
-                for (int j = 0; j < Input.NumberofSUE; j++)
-                {
-                    UE new_SUE = new UE(x + rd.Next(-Input.SBSCover, Input.SBSCover), y + rd.Next(-Input.SBSCover, Input.SBSCover), 0);
-                    new_SUE.PowerTr = Input.SUE_Max_PowerTr;
+                    double x = 0, y = 0;
+                    {
+                        if (i % 4 == 0)
+                        {
+                            x = Input.List_MBS[0].Position.X / 2;
+                            y = Input.List_MBS[0].Position.Y / 2;
+                        }
+                        else if (i % 4 == 1)
+                        {
+                            x = Input.List_MBS[0].Position.X / 2 + Input.List_MBS[0].Position.X;
+                            y = Input.List_MBS[0].Position.Y / 2;
+                        }
+                        else if (i % 4 == 2)
+                        {
+                            x = Input.List_MBS[0].Position.X / 2 + Input.List_MBS[0].Position.X;
+                            y = Input.List_MBS[0].Position.Y / 2 + Input.List_MBS[0].Position.Y;
+                        }
+                        else if (i % 4 == 3)
+                        {
+                            x = Input.List_MBS[0].Position.X / 2;
+                            y = Input.List_MBS[0].Position.Y / 2 + Input.List_MBS[0].Position.Y;
+                        }
+                    }
+                    SBS new_SBS = new SBS(x, y, 0);
                     new_SBS.Id_SBS = i + 1;
-                    new_SUE.UE_Id = ++Input.UE_Id;
-                    new_SBS.ListUE.Add(new_SUE);
+                    Input.List_SBS.Add(new_SBS);
                 }
-                //Tao Pair trong vung phu SBS
-                for (int j = 0; j < Input.NumberofPair; j++)
+                //Khoi tao SUE
+                for (int i = 0; i < Input.NumberofSBS; i++)
                 {
-                    Pair pair = new Pair();
-                    //Fixed again position Pair
-                    UE t_UE = new UE(x + rd.Next(-Input.SBSCover + Input.D2DCover, Input.SBSCover - Input.D2DCover), y + rd.Next(-Input.SBSCover + Input.D2DCover, Input.SBSCover - Input.D2DCover), 0);
-                    t_UE.UE_Id = ++Input.UE_Id;
-                    UE r_UE = new UE(t_UE.Position.X + rd.Next(-Input.D2DCover, Input.D2DCover), t_UE.Position.Y + rd.Next(-Input.D2DCover, Input.D2DCover), 0);
-                    t_UE.PowerTr = Input.D2D_Max_PowerTr;
-                    r_UE.PowerTr = Input.D2D_Max_PowerTr;
-                    pair.UE_r = r_UE;
-                    pair.UE_t = t_UE;
-                    new_SBS.ListPair.Add(pair);
+                    for (int j = 0; j < Input.NumberofSUE; j++)
+                    {
+                        int X = Convert.ToInt32(read1.ReadLine());
+                        int Y = Convert.ToInt32(read1.ReadLine());
+                        UE new_SUE = new UE(X, Y, 0);
+                        new_SUE.PowerTr = Input.SUE_Max_PowerTr;
+                        new_SUE.UE_Id = ++Input.UE_Id;
+                        Input.List_SBS[i].ListUE.Add(new_SUE);
+                    }
                 }
-                Input.List_SBS.Add(new_SBS);
+                //Khoi tao pair
+                int NumberOfPair = Convert.ToInt32(read1.ReadLine());
+                Console.WriteLine(NumberOfPair);
+                for (int i = 0; i < Input.NumberofSBS; i++)
+                {
+                    for (int j = 0; j < Input.NumberofPair; j++)
+                    {
+                        Pair pair = new Pair();
+                        int X = Convert.ToInt32(read1.ReadLine());
+                        int Y = Convert.ToInt32(read1.ReadLine());
+                        UE t_UE = new UE(X, Y, 0);
+                        t_UE.UE_Id = ++Input.UE_Id;
+                        int X2 = Convert.ToInt32(read1.ReadLine());
+                        int Y2 = Convert.ToInt32(read1.ReadLine());
+                        UE r_UE = new UE(X2, Y2, 0);
+                        t_UE.UE_Id = ++Input.UE_Id;
+                        pair.UE_r = r_UE;
+                        pair.UE_t = t_UE;
+                        t_UE.PowerTr = Input.D2D_Max_PowerTr;
+                        r_UE.PowerTr = Input.D2D_Max_PowerTr;
+                        Input.List_SBS[i].ListPair.Add(pair);
+                    }
+                }
+                read1.Close();
             }
-            //Khoi tao vi tri M-UE
-            for (int i = 0; i < Input.NumberofM_UE; i++)
+            else
             {
-                UE newUE = new UE();
-                newUE.UE_Id = ++Input.UE_Id;
-                Random rd = new Random(Guid.NewGuid().GetHashCode());
-                int x = 0, y = 0;
-                if (i % 4 == 0)
+                //Khoi tao vi tri M-UE
+                FileStream fs = new FileStream(path1, FileMode.Create);
+                StreamWriter sw1 = new StreamWriter(fs);
+                sw1.WriteLine(Input.NumberofM_UE);
+                for (int i = 0; i < Input.NumberofM_UE; i++)
                 {
-                    x = rd.Next(0, (int)Input.List_MBS[0].Position.X / 2);
-                    y = rd.Next(0, (int)Input.List_MBS[0].Position.Y / 2);
+                    UE newUE = new UE();
+                    newUE.UE_Id = ++Input.UE_Id;
+                    Random rd = new Random(Guid.NewGuid().GetHashCode());
+                    int x = 0, y = 0;
+                    {
+                        if (i % 4 == 0)
+                        {
+                            x = rd.Next(0, (int)Input.List_MBS[0].Position.X / 2);
+                            y = rd.Next(0, (int)Input.List_MBS[0].Position.Y / 2);
+                        }
+                        else if (i % 4 == 1)
+                        {
+                            x = rd.Next((int)Input.List_MBS[0].Position.X / 2, (int)Input.List_MBS[0].Position.X / 2 + (int)Input.List_MBS[0].Position.X);
+                            y = rd.Next(0, (int)Input.List_MBS[0].Position.Y / 2);
+                        }
+                        else if (i % 4 == 2)
+                        {
+                            x = rd.Next(0, (int)Input.List_MBS[0].Position.X / 2);
+                            y = rd.Next((int)Input.List_MBS[0].Position.Y / 2, (int)Input.List_MBS[0].Position.Y / 2 + (int)Input.List_MBS[0].Position.Y);
+                        }
+                        else if (i % 4 == 3)
+                        {
+                            x = rd.Next((int)Input.List_MBS[0].Position.X / 2, (int)Input.List_MBS[0].Position.X / 2 + (int)Input.List_MBS[0].Position.X);
+                            y = rd.Next((int)Input.List_MBS[0].Position.Y / 2, (int)Input.List_MBS[0].Position.Y / 2 + (int)Input.List_MBS[0].Position.Y);
+                        }
+                    }
+                    Position position = new Position(x, y, 0);
+                    newUE.Position = position;
+                    newUE.PowerTr = Input.Max_PowerTr;
+                    Input.List_MBS[0].ListUE.Add(newUE);
+                    sw1.WriteLine(x);
+                    sw1.WriteLine(y);
                 }
-                else if (i % 4 == 1)
+                //Khoi tao SBS chia thanh 4 vung phan bo deu 
+                for (int i = 0; i < Input.NumberofSBS; i++)
                 {
-                    x = rd.Next((int)Input.List_MBS[0].Position.X / 2, (int)Input.List_MBS[0].Position.X / 2 + (int)Input.List_MBS[0].Position.X);
-                    y = rd.Next(0, (int)Input.List_MBS[0].Position.Y / 2);
+                    double x = 0, y = 0;
+                    {
+                        if (i % 4 == 0)
+                        {
+                            x = Input.List_MBS[0].Position.X / 2;
+                            y = Input.List_MBS[0].Position.Y / 2;
+                        }
+                        else if (i % 4 == 1)
+                        {
+                            x = Input.List_MBS[0].Position.X / 2 + Input.List_MBS[0].Position.X;
+                            y = Input.List_MBS[0].Position.Y / 2;
+                        }
+                        else if (i % 4 == 2)
+                        {
+                            x = Input.List_MBS[0].Position.X / 2 + Input.List_MBS[0].Position.X;
+                            y = Input.List_MBS[0].Position.Y / 2 + Input.List_MBS[0].Position.Y;
+                        }
+                        else if (i % 4 == 3)
+                        {
+                            x = Input.List_MBS[0].Position.X / 2;
+                            y = Input.List_MBS[0].Position.Y / 2 + Input.List_MBS[0].Position.Y;
+                        }
+                    }
+                    SBS new_SBS = new SBS(x, y, 0);
+                    new_SBS.Id_SBS = i + 1;
+                    Input.List_SBS.Add(new_SBS);
                 }
-                else if (i % 4 == 2)
+                //Khoi tao SUE
+                sw1.WriteLine(Input.NumberofSBS * Input.NumberofSUE);
+                for (int i = 0; i < Input.NumberofSBS; i++)
                 {
-                    x = rd.Next(0, (int)Input.List_MBS[0].Position.X / 2);
-                    y = rd.Next((int)Input.List_MBS[0].Position.Y / 2, (int)Input.List_MBS[0].Position.Y / 2 + (int)Input.List_MBS[0].Position.Y);
+                    for (int j = 0; j < Input.NumberofSUE; j++)
+                    {
+                        Random rd = new Random(Guid.NewGuid().GetHashCode());
+                        UE new_SUE = new UE(Input.List_SBS[i].Position.X + rd.Next(-Input.SBSCover, Input.SBSCover), Input.List_SBS[i].Position.Y + rd.Next(-Input.SBSCover, Input.SBSCover), 0);
+                        new_SUE.PowerTr = Input.SUE_Max_PowerTr;
+                        new_SUE.UE_Id = ++Input.UE_Id;
+                        Input.List_SBS[i].ListUE.Add(new_SUE);
+                        sw1.WriteLine(new_SUE.Position.X);
+                        sw1.WriteLine(new_SUE.Position.Y);
+                    }
                 }
-                else if (i % 4 == 3)
+                //Khoi tao D2DPair
+                sw1.WriteLine(Input.NumberofPair*Input.NumberofSBS);
+                for (int i = 0; i < Input.NumberofSBS; i++)
                 {
-                    x = rd.Next((int)Input.List_MBS[0].Position.X / 2, (int)Input.List_MBS[0].Position.X / 2 + (int)Input.List_MBS[0].Position.X);
-                    y = rd.Next((int)Input.List_MBS[0].Position.Y / 2, (int)Input.List_MBS[0].Position.Y / 2 + (int)Input.List_MBS[0].Position.Y);
+                    for (int j = 0; j < Input.NumberofPair; j++)
+                    {
+                        Random rd = new Random(Guid.NewGuid().GetHashCode());
+                        Pair pair = new Pair();
+                        UE t_UE = new UE(Input.List_SBS[i].Position.X + rd.Next(-Input.SBSCover + Input.D2DCover, Input.SBSCover - Input.D2DCover), Input.List_SBS[i].Position.Y + rd.Next(-Input.SBSCover + Input.D2DCover, Input.SBSCover - Input.D2DCover), 0);
+                        t_UE.UE_Id = ++Input.UE_Id;
+                        UE r_UE = new UE(t_UE.Position.X + rd.Next(-Input.D2DCover, Input.D2DCover), t_UE.Position.Y + rd.Next(-Input.D2DCover, Input.D2DCover), 0);
+                        t_UE.PowerTr = Input.D2D_Max_PowerTr;
+                        r_UE.PowerTr = Input.D2D_Max_PowerTr;
+                        pair.UE_r = r_UE;
+                        pair.UE_t = t_UE;
+                        Input.List_SBS[i].ListPair.Add(pair);
+                        sw1.WriteLine(t_UE.Position.X);
+                        sw1.WriteLine(t_UE.Position.Y);
+                        sw1.WriteLine(r_UE.Position.X);
+                        sw1.WriteLine(r_UE.Position.Y);
+                    }
                 }
-                Position position = new Position(x, y, 0);
-                newUE.Position = position;
-                newUE.PowerTr = Input.Max_PowerTr;
-                Input.List_MBS[0].ListUE.Add(newUE);
+                sw1.Close();
             }
+        }
+        public static void Create_eventList() { }
+        public static void Excuting_Event() {
+
             //Khoi tao request cap kenh cho M-UE
             for (int i = 0; i < Input.List_MBS[0].ListUE.Count; i++)
             {
@@ -149,7 +269,6 @@ namespace D2D_simulation
             //MBS xu li cap kenh cho M-UE
             RequestProcess ReqProc = new RequestProcess();
             ReqProc.processRequest();
-
 
             //SBS chon BWP
             for (int i = 0; i < Input.NumberofSBS; i++)
@@ -184,7 +303,6 @@ namespace D2D_simulation
                     Console.WriteLine("Id of BWP = " + Input.List_SBS[i].ListBWP[j].Id_BWP + " count=" + Input.List_SBS[i].ListBWP[j].Count);
                 }
             }
-
             //SBS chon BWP cap cho device
             //Check tung SBS xem BWP nao dang duoc su sung de chon BWP cap cho  device
             for (int i = 0; i < Input.List_SBS.Count; i++)
@@ -229,7 +347,7 @@ namespace D2D_simulation
                     for (int m = 0; m < Input.r; m++)
                     {
                         //Check _indexchannel > channel/BWP - 1 (do lay 1 kenh tham chieu)
-                        if (_indexchannel == (Input.NumberofChannel / Input.NumberofBWP))
+                        if (_indexchannel == (Input.NumberofChannel / Input.NumberofBWP) )
                         {
                             _indexchannel = 0;
                             _indexBWP++;
@@ -242,10 +360,18 @@ namespace D2D_simulation
                             new_sbs.ListPair[k].UE_t.List_channel.Add(new_channel);
                             new_sbs.ListBWP[_indexBWP].ListChannel[_indexchannel].List_device.Add(new_sbs.ListPair[k].UE_t);
                             _indexchannel++;
+                            //Check so luong device nam trong kenh
+                            for (int indexchannel = 0; indexchannel < Input.List_MBS[0].ListChannel.Count; indexchannel++)
+                            {
+                                if (Input.List_MBS[0].ListChannel[indexchannel].channel_id == new_channel.channel_id)
+                                {
+                                    Input.List_MBS[0].ListChannel[indexchannel].List_device.Add(new_sbs.ListPair[k].UE_t);
+                                }
+                            }
                         }
                         else
                         {
-                            Console.WriteLine("Sorry, don't have enough BWP");
+                            Console.WriteLine("Sorry device " + new_sbs.ListPair[k].UE_t.UE_Id + ", don't have enough BWP");
                             break;
                         }
                     }
@@ -270,17 +396,23 @@ namespace D2D_simulation
                             new_sbs.ListUE[k].List_channel.Add(new_channel);
                             new_sbs.ListBWP[_indexBWP].ListChannel[_indexchannel].List_device.Add(new_sbs.ListUE[k]);
                             _indexchannel++;
+                            //Check so luong device nam trong kenh
+                            for (int indexchannel = 0; indexchannel < Input.List_MBS[0].ListChannel.Count; indexchannel++)
+                            {
+                                if (Input.List_MBS[0].ListChannel[indexchannel].channel_id == new_channel.channel_id)
+                                {
+                                    Input.List_MBS[0].ListChannel[indexchannel].List_device.Add(new_sbs.ListUE[k]);
+                                }
+                            }
                         }
                         else
                         {
-                            Console.WriteLine("Sorry, don't have enough BWP");
+                            Console.WriteLine("Sorry device " + new_sbs.ListUE[k].UE_Id + ", don't have enough BWP");
                             break;
                         }
                     }
                 }
             }
-
-
 
             // Gia su MUE o bien
             //Moi kenh co 1 muc interference cho phep
@@ -315,7 +447,6 @@ namespace D2D_simulation
                 }
             }
 
-
             //Tinh cong suat phat cho phep.
             for (int i = 0; i < Input.List_SBS.Count; i++)
             {
@@ -329,74 +460,41 @@ namespace D2D_simulation
                             double linkgain, pathloss, shadowing;
                             var lognormal = new LogNormal(0, 1);
                             shadowing = lognormal.Sample();
-                            pathloss = Input.List_SBS[i].ListBWP[j].ListChannel[k].List_device[0].PassLoss(Input.List_MBS[0].Position);
+                            pathloss = Input.List_SBS[i].PassLoss(Input.List_MBS[0].Position);
                             linkgain = pathloss + shadowing;
-                            Input.List_SBS[i].ListBWP[j].ListChannel[k].List_device[m].Shadowing = shadowing;
+                           // Input.List_SBS[i].ListBWP[j].ListChannel[k].List_device[m].Shadowing = shadowing;
                             Input.List_SBS[i].ListBWP[j].ListChannel[k].List_device[m].PowerTr = Math.Min(Input.List_SBS[i].ListBWP[j].ListChannel[k].Limit_interference + linkgain, Input.Max_PowerTr);
-                            Console.WriteLine("Power=" + Input.List_SBS[i].ListBWP[j].ListChannel[k].List_device[m].PowerTr);
+                            Console.WriteLine(Input.List_SBS[i].ListBWP[j].ListChannel[k].List_device[m].UE_Id + "Power=" + Input.List_SBS[i].ListBWP[j].ListChannel[k].List_device[m].PowerTr);
 
                         }
                     }
                 }
             }
-
-            /* //Check device trong SBS
-             for (int i = 0; i < Input.List_SBS.Count; i++)
-             {
-                 Console.WriteLine("---------SBS" + i);
-                 for (int j = 0; j < Input.List_SBS[i].ListBWP.Count; j++)
-                 {
-                     Console.WriteLine("BWP" + j);
-                     for (int k = 0; k < Input.List_SBS[i].ListBWP[j].ListChannel.Count; k++)
-                     {
-                         Console.WriteLine("List device: " + Input.List_SBS[i].ListBWP[j].ListChannel[k].channel_id);
-                     }
-                 }
-             }*/
-
-
-
-
-
-
-
+        }
+        public static void Output()
+        {
             //Tinh SINR tung M-UE
             double tPutMUE = 0;
+            string path10 = Input.path + "\\MUEthroughput_each_devicePP" + ".txt";
+            FileStream fs10 = new FileStream(path10, FileMode.Create);
+            StreamWriter sw10 = new StreamWriter(fs10);
             for (int i = 0; i < Input.List_MBS[0].ListUE.Count; i++)
             {
                 int channel_id = Input.List_MBS[0].ListUE[i].channel_id;
                 double I_total = 0;
                 double P_r = Input.List_MBS[0].ListUE[i].PowerTr - Input.List_MBS[0].ListUE[i].Linkgain;
-
                 double SINR;
                 double M_Capacity = 0;
-                //Xet device
-                /*for (int k = 0; k < Input.List_SBS.Count; k++)
-                {
-                    for (int m = 0; m < Input.List_SBS[k].ListBWP.Count; m++)
-                    {
-                        for(int p=0; p < Input.List_SBS[k].ListBWP[m].ListChannel.Count; p++)
-                        {
-                            if (Input.List_SBS[k].ListBWP[m].ListChannel[p].channel_id == channel_id)
-                            {
-                                UE ue_t = Input.List_SBS[k].ListBWP[m].ListChannel[p].List_device[0];
-                                double pathloss = ue_t.PassLoss(Input.List_MBS[0].Position);
-                                double Linkgain = ue_t.Shadowing + pathloss;
-                                I_total += Math.Pow(10, (ue_t.PowerTr / 10) - (Linkgain / 10));
-                            }
-                        }
-                    }
-                }*/
                 //Nhieu tu cac SBS
                 for (int m = 0; m < Input.List_SBS.Count; m++)
                 {
-
                     //Xet nhieu tu list Pair
                     for (int indexPair = 0; indexPair < Input.List_SBS[m].ListPair.Count; indexPair++)
                     {
                         if (Input.List_SBS[m].ListPair[indexPair].UE_t.List_channel.Exists(x => x.channel_id == channel_id))
                         {
                             double pathloss = Input.List_SBS[m].ListPair[indexPair].UE_t.PassLoss(Input.List_MBS[0].Position);
+                            
                             var lognormal = new LogNormal(0, 1);
                             double shadowing = lognormal.Sample();
                             double linkgain = pathloss + shadowing;
@@ -415,7 +513,6 @@ namespace D2D_simulation
                             I_total += Math.Pow(10, (Input.List_SBS[m].ListUE[indexSUE].PowerTr / 10) - (linkgain / 10));
                         }
                     }
-
                 }
                 if (I_total != 0)
                 {
@@ -424,7 +521,7 @@ namespace D2D_simulation
                 }
                 else
                 {
-                    SINR = 1000000;
+                    SINR = 20;
                 }
                 //Capacity
                 {
@@ -454,28 +551,34 @@ namespace D2D_simulation
                 }
                 Input.List_MBS[0].ListUE[i].SINR = SINR;
                 tPutMUE += M_Capacity;
+                sw10.WriteLine(M_Capacity.ToString().Replace(",", "."));
+                Input.List_MBS[0].ListUE[i].SINR = SINR;
             }
-
+            sw10.Close();
             //Tinh SINR tung pair
             Console.WriteLine("SINR pair--------------------------");
             double throughput = 0;
+            double power = 0;
+            string path11 = Input.path + "\\D2Dthroughput_each_devicePP" + ".txt";
+            FileStream fs11 = new FileStream(path11, FileMode.Create);
+            StreamWriter sw11 = new StreamWriter(fs11);
             for (int i = 0; i < Input.List_SBS.Count; i++)
             {
                 for (int j = 0; j < Input.List_SBS[i].ListPair.Count; j++)
                 {
                     UE ue_t = Input.List_SBS[i].ListPair[j].UE_t;
                     UE ue_r = Input.List_SBS[i].ListPair[j].UE_r;
-                    Console.WriteLine("POWER P_T=" + ue_t.PowerTr);
+                    power += ue_t.PowerTr;
                     Console.WriteLine("Device" + ue_t.UE_Id);
                     double Capacity = 0;
-
                     for (int k = 0; k < ue_t.List_channel.Count; k++)
                     {
-                        double P_r;
+                        double P_r,SINR, C;
                         double I_total = 0;
-                        double SINR, C;
+                        var Lognormal = new LogNormal(0, 1);
+                        double Shadowing = Lognormal.Sample();
                         Channel channel = ue_t.List_channel[k];
-                        double Linkgain = ue_t.PassLoss(ue_r.Position) + channel.List_device[0].Shadowing;
+                        double Linkgain = ue_t.PassLoss(ue_r.Position) + Shadowing;
                         P_r = channel.List_device[0].PowerTr - Linkgain;
                         //Nhieu tu cac M-UE
                         for (int m = 0; m < Input.List_MBS[0].ListUE.Count; m++)
@@ -557,17 +660,22 @@ namespace D2D_simulation
                         Capacity += C;
                     }
                     Console.WriteLine("Capacity=" + Capacity);
+                    sw11.WriteLine(Capacity.ToString().Replace(",", "."));
                     throughput += Capacity;
                 }
             }
+            sw11.Close();
+            Console.WriteLine("POWER P_T=" + power);
             Console.WriteLine("Throughput of MUE=" + tPutMUE);
             Console.WriteLine("throughputPair=" + throughput);
             Input.List_MBS[0].ListTP.Add(throughput);
-        }
-        public static void Create_eventList() { }
-        public static void Excuting_Event() { }
-        public static void Output()
-        {
+            double totaldevice = 0;
+            for (int i = 0; i < Input.List_MBS[0].ListChannel.Count; i++)
+            {
+                Console.WriteLine("Channel_" + i + "has " + Input.List_MBS[0].ListChannel[i].List_device.Count);
+                totaldevice += Input.List_MBS[0].ListChannel[i].List_device.Count;
+            }
+            Console.WriteLine("Total device=" + totaldevice);
             /*    Console.WriteLine("------------------------------------------------------");
                 Console.WriteLine("Total D2D_pair = " + Input.List_Pair.Count);
                 Console.WriteLine("------------------------------------------------------");
