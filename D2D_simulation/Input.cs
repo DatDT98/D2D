@@ -10,7 +10,7 @@ namespace D2D_simulation
         public static int NumberofM_UE = 100;
         public static int NumberofPair = 20;
         public static int NumberofSUE = 80;
-        public static int NumberofSBS = 4;
+        public static int NumberofSBS = 1;
         public static int NumberofChannel = 100;
         public static int NumberofBWP = 5;
         public static int NumberOfBWP_permit = 5;

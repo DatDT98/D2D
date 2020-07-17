@@ -161,23 +161,23 @@ namespace D2D_simulation
                     {
                         if (i % 4 == 0)
                         {
-                            x = rd.Next(0, (int)Input.List_MBS[0].Position.X / 2);
-                            y = rd.Next(0, (int)Input.List_MBS[0].Position.Y / 2);
+                            x = rd.Next(0, (int)Input.List_MBS[0].Position.X);
+                            y = rd.Next(0, (int)Input.List_MBS[0].Position.Y);
                         }
                         else if (i % 4 == 1)
                         {
-                            x = rd.Next((int)Input.List_MBS[0].Position.X / 2, (int)Input.List_MBS[0].Position.X / 2 + (int)Input.List_MBS[0].Position.X);
-                            y = rd.Next(0, (int)Input.List_MBS[0].Position.Y / 2);
+                            x = rd.Next((int)Input.List_MBS[0].Position.X, (int)Input.List_MBS[0].Position.X + (int)Input.List_MBS[0].Position.X);
+                            y = rd.Next(0, (int)Input.List_MBS[0].Position.Y);
                         }
                         else if (i % 4 == 2)
                         {
-                            x = rd.Next(0, (int)Input.List_MBS[0].Position.X / 2);
-                            y = rd.Next((int)Input.List_MBS[0].Position.Y / 2, (int)Input.List_MBS[0].Position.Y / 2 + (int)Input.List_MBS[0].Position.Y);
+                            x = rd.Next(0, (int)Input.List_MBS[0].Position.X);
+                            y = rd.Next((int)Input.List_MBS[0].Position.Y, (int)Input.List_MBS[0].Position.Y + (int)Input.List_MBS[0].Position.Y);
                         }
                         else if (i % 4 == 3)
                         {
-                            x = rd.Next((int)Input.List_MBS[0].Position.X / 2, (int)Input.List_MBS[0].Position.X / 2 + (int)Input.List_MBS[0].Position.X);
-                            y = rd.Next((int)Input.List_MBS[0].Position.Y / 2, (int)Input.List_MBS[0].Position.Y / 2 + (int)Input.List_MBS[0].Position.Y);
+                            x = rd.Next((int)Input.List_MBS[0].Position.X, (int)Input.List_MBS[0].Position.X + (int)Input.List_MBS[0].Position.X);
+                            y = rd.Next((int)Input.List_MBS[0].Position.Y, (int)Input.List_MBS[0].Position.Y + (int)Input.List_MBS[0].Position.Y);
                         }
                     }
                     Position position = new Position(x, y, 0);
@@ -192,25 +192,26 @@ namespace D2D_simulation
                 {
                     double x = 0, y = 0;
                     {
+                        Random rd = new Random(Guid.NewGuid().GetHashCode());
                         if (i % 4 == 0)
                         {
-                            x = Input.List_MBS[0].Position.X / 2;
-                            y = Input.List_MBS[0].Position.Y / 2;
+                            x = rd.Next(0 + Input.SBSCover, (int)Input.List_MBS[0].Position.X - Input.SBSCover);
+                            y = rd.Next(0 + Input.SBSCover, (int)Input.List_MBS[0].Position.Y - Input.SBSCover);
                         }
                         else if (i % 4 == 1)
                         {
-                            x = Input.List_MBS[0].Position.X / 2 + Input.List_MBS[0].Position.X;
-                            y = Input.List_MBS[0].Position.Y / 2;
+                            x = rd.Next(Input.SBSCover + (int)Input.List_MBS[0].Position.X, 2*(int)Input.List_MBS[0].Position.X - Input.SBSCover);
+                            y = rd.Next(0 + Input.SBSCover, (int)Input.List_MBS[0].Position.Y - Input.SBSCover);
                         }
                         else if (i % 4 == 2)
                         {
-                            x = Input.List_MBS[0].Position.X / 2 + Input.List_MBS[0].Position.X;
-                            y = Input.List_MBS[0].Position.Y / 2 + Input.List_MBS[0].Position.Y;
+                            x = rd.Next(Input.SBSCover + (int)Input.List_MBS[0].Position.X, 2 * (int)Input.List_MBS[0].Position.X - Input.SBSCover);
+                            y = rd.Next(Input.SBSCover + (int)Input.List_MBS[0].Position.Y, 2 * (int)Input.List_MBS[0].Position.Y - Input.SBSCover);
                         }
                         else if (i % 4 == 3)
                         {
-                            x = Input.List_MBS[0].Position.X / 2;
-                            y = Input.List_MBS[0].Position.Y / 2 + Input.List_MBS[0].Position.Y;
+                            x = rd.Next(0 + Input.SBSCover, (int)Input.List_MBS[0].Position.X - Input.SBSCover);
+                            y = rd.Next(Input.SBSCover + (int)Input.List_MBS[0].Position.Y, 2 * (int)Input.List_MBS[0].Position.Y - Input.SBSCover);
                         }
                     }
                     SBS new_SBS = new SBS(x, y, 0);
@@ -425,7 +426,7 @@ namespace D2D_simulation
                 pathloss = 127 + 30 * Math.Log10(Input.MBSCover * Math.Pow(10, -3)); ;
                 linkgain = pathloss + shadowing;
                 Input.List_MBS[0].ListUE[i].Shadowing = shadowing;
-                Input.List_MBS[0].ListUE[i].Linkgain = linkgain;
+                //Input.List_MBS[0].ListUE[i].Linkgain = linkgain;
                 I_total = Input.Max_PowerTr - linkgain - Input.SINR_threshold; //dB
                 //Nhieu cho phep tren moi device
                 I_i = I_total + 10 * Math.Log10(Input.k) - 10 * Math.Log10(Input.List_SBS.Count);
@@ -462,10 +463,9 @@ namespace D2D_simulation
                             shadowing = lognormal.Sample();
                             pathloss = Input.List_SBS[i].PassLoss(Input.List_MBS[0].Position);
                             linkgain = pathloss + shadowing;
-                           // Input.List_SBS[i].ListBWP[j].ListChannel[k].List_device[m].Shadowing = shadowing;
+                            Input.List_SBS[i].ListBWP[j].ListChannel[k].List_device[m].Shadowing = shadowing;
                             Input.List_SBS[i].ListBWP[j].ListChannel[k].List_device[m].PowerTr = Math.Min(Input.List_SBS[i].ListBWP[j].ListChannel[k].Limit_interference + linkgain, Input.Max_PowerTr);
                             Console.WriteLine(Input.List_SBS[i].ListBWP[j].ListChannel[k].List_device[m].UE_Id + "Power=" + Input.List_SBS[i].ListBWP[j].ListChannel[k].List_device[m].PowerTr);
-
                         }
                     }
                 }
@@ -482,7 +482,8 @@ namespace D2D_simulation
             {
                 int channel_id = Input.List_MBS[0].ListUE[i].channel_id;
                 double I_total = 0;
-                double P_r = Input.List_MBS[0].ListUE[i].PowerTr - Input.List_MBS[0].ListUE[i].Linkgain;
+                double Linkgain = Input.List_MBS[0].ListUE[i].PassLoss(Input.List_MBS[0].Position) + Input.List_MBS[0].ListUE[i].Shadowing;
+                double P_r = Input.List_MBS[0].ListUE[i].PowerTr - Linkgain;
                 double SINR;
                 double M_Capacity = 0;
                 //Nhieu tu cac SBS
@@ -494,10 +495,9 @@ namespace D2D_simulation
                         if (Input.List_SBS[m].ListPair[indexPair].UE_t.List_channel.Exists(x => x.channel_id == channel_id))
                         {
                             double pathloss = Input.List_SBS[m].ListPair[indexPair].UE_t.PassLoss(Input.List_MBS[0].Position);
-                            
                             var lognormal = new LogNormal(0, 1);
                             double shadowing = lognormal.Sample();
-                            double linkgain = pathloss + shadowing;
+                            double linkgain = pathloss + Input.List_SBS[m].ListPair[indexPair].UE_t.Shadowing;
                             I_total += Math.Pow(10, (Input.List_SBS[m].ListPair[indexPair].UE_t.PowerTr / 10) - (linkgain / 10));
                         }
                     }
@@ -509,7 +509,7 @@ namespace D2D_simulation
                             double pathloss = Input.List_SBS[m].ListUE[indexSUE].PassLoss(Input.List_MBS[0].Position);
                             var lognormal = new LogNormal(0, 1);
                             double shadowing = lognormal.Sample();
-                            double linkgain = pathloss + shadowing;
+                            double linkgain = pathloss + Input.List_SBS[m].ListUE[indexSUE].Shadowing;
                             I_total += Math.Pow(10, (Input.List_SBS[m].ListUE[indexSUE].PowerTr / 10) - (linkgain / 10));
                         }
                     }
@@ -665,7 +665,17 @@ namespace D2D_simulation
                 }
             }
             sw11.Close();
-            Console.WriteLine("POWER P_T=" + power);
+            //Debug cong suat phat
+            double powerSUE = 0;
+            for(int i=0; i < Input.List_SBS.Count; i++)
+            {
+                for(int j=0; j < Input.List_SBS[i].ListUE.Count; j++)
+                {
+                    powerSUE += Input.List_SBS[i].ListUE[j].PowerTr;
+                }
+            }
+            Console.WriteLine("POWER D2D=" + power);
+            Console.WriteLine("POWER SUE=" + powerSUE);
             Console.WriteLine("Throughput of MUE=" + tPutMUE);
             Console.WriteLine("throughputPair=" + throughput);
             Input.List_MBS[0].ListTP.Add(throughput);
