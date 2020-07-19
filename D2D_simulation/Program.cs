@@ -426,10 +426,14 @@ namespace D2D_simulation
                 pathloss = 127 + 30 * Math.Log10(Input.MBSCover * Math.Pow(10, -3)); ;
                 linkgain = pathloss + shadowing;
                 Input.List_MBS[0].ListUE[i].Shadowing = shadowing;
-                //Input.List_MBS[0].ListUE[i].Linkgain = linkgain;
+                Console.WriteLine("Linkgain is MUE: " + linkgain);
                 I_total = Input.Max_PowerTr - linkgain - Input.SINR_threshold; //dB
+                Console.WriteLine("Total Interference permit: " + I_total);
+
                 //Nhieu cho phep tren moi device
                 I_i = I_total + 10 * Math.Log10(Input.k) - 10 * Math.Log10(Input.List_SBS.Count);
+                Console.WriteLine("Interference each device=" + I_i);
+
                 for (int j = 0; j < Input.List_SBS.Count; j++)
                 {
                     for (int k = 0; k < Input.List_SBS[j].ListBWP.Count; k++)
@@ -465,6 +469,7 @@ namespace D2D_simulation
                             linkgain = pathloss + shadowing;
                             Input.List_SBS[i].ListBWP[j].ListChannel[k].List_device[m].Shadowing = shadowing;
                             Input.List_SBS[i].ListBWP[j].ListChannel[k].List_device[m].PowerTr = Math.Min(Input.List_SBS[i].ListBWP[j].ListChannel[k].Limit_interference + linkgain, Input.Max_PowerTr);
+                            Console.WriteLine("Linkgain from device to MBS=" + linkgain);
                             Console.WriteLine(Input.List_SBS[i].ListBWP[j].ListChannel[k].List_device[m].UE_Id + "Power=" + Input.List_SBS[i].ListBWP[j].ListChannel[k].List_device[m].PowerTr);
                         }
                     }
@@ -480,6 +485,8 @@ namespace D2D_simulation
             StreamWriter sw10 = new StreamWriter(fs10);
             for (int i = 0; i < Input.List_MBS[0].ListUE.Count; i++)
             {
+                Console.WriteLine("*********************************");
+                Console.WriteLine("MUE_" + Input.List_MBS[0].ListUE[i].UE_Id);
                 int channel_id = Input.List_MBS[0].ListUE[i].channel_id;
                 double I_total = 0;
                 double Linkgain = Input.List_MBS[0].ListUE[i].PassLoss(Input.List_MBS[0].Position) + Input.List_MBS[0].ListUE[i].Shadowing;
@@ -494,11 +501,14 @@ namespace D2D_simulation
                     {
                         if (Input.List_SBS[m].ListPair[indexPair].UE_t.List_channel.Exists(x => x.channel_id == channel_id))
                         {
-                            double pathloss = Input.List_SBS[m].ListPair[indexPair].UE_t.PassLoss(Input.List_MBS[0].Position);
+                            UE ue_t = Input.List_SBS[m].ListPair[indexPair].UE_t;
+                            double pathloss = ue_t.PassLoss(Input.List_MBS[0].Position);
                             var lognormal = new LogNormal(0, 1);
                             double shadowing = lognormal.Sample();
-                            double linkgain = pathloss + Input.List_SBS[m].ListPair[indexPair].UE_t.Shadowing;
-                            I_total += Math.Pow(10, (Input.List_SBS[m].ListPair[indexPair].UE_t.PowerTr / 10) - (linkgain / 10));
+                            double linkgain = pathloss + ue_t.Shadowing;
+                            I_total += Math.Pow(10, (ue_t.PowerTr / 10) - (linkgain / 10));
+                            Console.WriteLine("DevicePair " + ue_t.UE_Id + " has power=" + ue_t.PowerTr);
+
                         }
                     }
                     //Xet nhieu tu list SUE
@@ -506,11 +516,14 @@ namespace D2D_simulation
                     {
                         if (Input.List_SBS[m].ListUE[indexSUE].List_channel.Exists(x => x.channel_id == channel_id))
                         {
-                            double pathloss = Input.List_SBS[m].ListUE[indexSUE].PassLoss(Input.List_MBS[0].Position);
+                            UE ue_t = Input.List_SBS[m].ListUE[indexSUE];
+                            double pathloss = ue_t.PassLoss(Input.List_MBS[0].Position);
                             var lognormal = new LogNormal(0, 1);
                             double shadowing = lognormal.Sample();
-                            double linkgain = pathloss + Input.List_SBS[m].ListUE[indexSUE].Shadowing;
-                            I_total += Math.Pow(10, (Input.List_SBS[m].ListUE[indexSUE].PowerTr / 10) - (linkgain / 10));
+                            double linkgain = pathloss + ue_t.Shadowing;
+                            I_total += Math.Pow(10, (ue_t.PowerTr / 10) - (linkgain / 10));
+                            Console.WriteLine("DeviceSUE " + ue_t.UE_Id + " has power=" + ue_t.PowerTr);
+
                         }
                     }
                 }
@@ -525,7 +538,7 @@ namespace D2D_simulation
                 }
                 //Capacity
                 {
-                    Console.WriteLine("SINR=" + SINR);
+                   // Console.WriteLine("SINR=" + SINR);
                     double C;
                     if (SINR < 0.5 && SINR > Input.SINR_outage)
                         C = 0.25 * Input.B;
@@ -666,7 +679,7 @@ namespace D2D_simulation
             }
             sw11.Close();
             //Debug cong suat phat
-            double powerSUE = 0;
+           /* double powerSUE = 0;
             for(int i=0; i < Input.List_SBS.Count; i++)
             {
                 for(int j=0; j < Input.List_SBS[i].ListUE.Count; j++)
@@ -675,7 +688,7 @@ namespace D2D_simulation
                 }
             }
             Console.WriteLine("POWER D2D=" + power);
-            Console.WriteLine("POWER SUE=" + powerSUE);
+            Console.WriteLine("POWER SUE=" + powerSUE);*/
             Console.WriteLine("Throughput of MUE=" + tPutMUE);
             Console.WriteLine("throughputPair=" + throughput);
             Input.List_MBS[0].ListTP.Add(throughput);
