@@ -1,0 +1,54 @@
+D:\Du_an\D2D_simulation\D2D_simulation\bin\Debug\netcoreapp3.1\D2D_simulation.exe
+D:\Du_an\D2D_simulation\D2D_simulation\bin\Debug\netcoreapp3.1\D2D_simulation.deps.json
+D:\Du_an\D2D_simulation\D2D_simulation\bin\Debug\netcoreapp3.1\D2D_simulation.runtimeconfig.json
+D:\Du_an\D2D_simulation\D2D_simulation\bin\Debug\netcoreapp3.1\D2D_simulation.runtimeconfig.dev.json
+D:\Du_an\D2D_simulation\D2D_simulation\bin\Debug\netcoreapp3.1\D2D_simulation.dll
+D:\Du_an\D2D_simulation\D2D_simulation\bin\Debug\netcoreapp3.1\D2D_simulation.pdb
+D:\Du_an\D2D_simulation\D2D_simulation\obj\Debug\netcoreapp3.1\D2D_simulation.csprojAssemblyReference.cache
+D:\Du_an\D2D_simulation\D2D_simulation\obj\Debug\netcoreapp3.1\D2D_simulation.AssemblyInfoInputs.cache
+D:\Du_an\D2D_simulation\D2D_simulation\obj\Debug\netcoreapp3.1\D2D_simulation.AssemblyInfo.cs
+D:\Du_an\D2D_simulation\D2D_simulation\obj\Debug\netcoreapp3.1\D2D_simulation.dll
+D:\Du_an\D2D_simulation\D2D_simulation\obj\Debug\netcoreapp3.1\D2D_simulation.pdb
+A:\Du_an\D2D_simulation\D2D_simulation\bin\Debug\netcoreapp3.1\D2D_simulation.exe
+A:\Du_an\D2D_simulation\D2D_simulation\bin\Debug\netcoreapp3.1\D2D_simulation.deps.json
+A:\Du_an\D2D_simulation\D2D_simulation\bin\Debug\netcoreapp3.1\D2D_simulation.runtimeconfig.json
+A:\Du_an\D2D_simulation\D2D_simulation\bin\Debug\netcoreapp3.1\D2D_simulation.runtimeconfig.dev.json
+A:\Du_an\D2D_simulation\D2D_simulation\bin\Debug\netcoreapp3.1\D2D_simulation.dll
+A:\Du_an\D2D_simulation\D2D_simulation\bin\Debug\netcoreapp3.1\D2D_simulation.pdb
+A:\Du_an\D2D_simulation\D2D_simulation\obj\Debug\netcoreapp3.1\D2D_simulation.csprojAssemblyReference.cache
+A:\Du_an\D2D_simulation\D2D_simulation\obj\Debug\netcoreapp3.1\D2D_simulation.AssemblyInfoInputs.cache
+A:\Du_an\D2D_simulation\D2D_simulation\obj\Debug\netcoreapp3.1\D2D_simulation.AssemblyInfo.cs
+A:\Du_an\D2D_simulation\D2D_simulation\obj\Debug\netcoreapp3.1\D2D_simulation.dll
+A:\Du_an\D2D_simulation\D2D_simulation\obj\Debug\netcoreapp3.1\D2D_simulation.pdb
+A:\Du_an\D2D_simulation\D2D_simulation\obj\Debug\netcoreapp3.1\D2D_simulation.genruntimeconfig.cache
+C:\Users\Simplify V2.DESKTOP-TMQD3R8\Dropbox\d2d\Code D2D\D2D_simulation\D2D_simulation\bin\Debug\netcoreapp3.1\D2D_simulation.exe
+C:\Users\Simplify V2.DESKTOP-TMQD3R8\Dropbox\d2d\Code D2D\D2D_simulation\D2D_simulation\bin\Debug\netcoreapp3.1\D2D_simulation.deps.json
+C:\Users\Simplify V2.DESKTOP-TMQD3R8\Dropbox\d2d\Code D2D\D2D_simulation\D2D_simulation\bin\Debug\netcoreapp3.1\D2D_simulation.runtimeconfig.json
+C:\Users\Simplify V2.DESKTOP-TMQD3R8\Dropbox\d2d\Code D2D\D2D_simulation\D2D_simulation\bin\Debug\netcoreapp3.1\D2D_simulation.runtimeconfig.dev.json
+C:\Users\Simplify V2.DESKTOP-TMQD3R8\Dropbox\d2d\Code D2D\D2D_simulation\D2D_simulation\bin\Debug\netcoreapp3.1\D2D_simulation.dll
+C:\Users\Simplify V2.DESKTOP-TMQD3R8\Dropbox\d2d\Code D2D\D2D_simulation\D2D_simulation\bin\Debug\netcoreapp3.1\D2D_simulation.pdb
+C:\Users\Simplify V2.DESKTOP-TMQD3R8\Dropbox\d2d\Code D2D\D2D_simulation\D2D_simulation\obj\Debug\netcoreapp3.1\D2D_simulation.csprojAssemblyReference.cache
+C:\Users\Simplify V2.DESKTOP-TMQD3R8\Dropbox\d2d\Code D2D\D2D_simulation\D2D_simulation\obj\Debug\netcoreapp3.1\D2D_simulation.csproj.CoreCompileInputs.cache
+C:\Users\Simplify V2.DESKTOP-TMQD3R8\Dropbox\d2d\Code D2D\D2D_simulation\D2D_simulation\obj\Debug\netcoreapp3.1\D2D_simulation.AssemblyInfoInputs.cache
+C:\Users\Simplify V2.DESKTOP-TMQD3R8\Dropbox\d2d\Code D2D\D2D_simulation\D2D_simulation\obj\Debug\netcoreapp3.1\D2D_simulation.AssemblyInfo.cs
+C:\Users\Simplify V2.DESKTOP-TMQD3R8\Dropbox\d2d\Code D2D\D2D_simulation\D2D_simulation\obj\Debug\netcoreapp3.1\D2D_simulation.dll
+C:\Users\Simplify V2.DESKTOP-TMQD3R8\Dropbox\d2d\Code D2D\D2D_simulation\D2D_simulation\obj\Debug\netcoreapp3.1\D2D_simulation.pdb
+C:\Users\Simplify V2.DESKTOP-TMQD3R8\Dropbox\d2d\Code D2D\D2D_simulation\D2D_simulation\obj\Debug\netcoreapp3.1\D2D_simulation.genruntimeconfig.cache
+A:\Du_an\D2D_simulation\D2D_simulation\bin\Debug\netcoreapp3.1\MathNet.Numerics.dll
+A:\Du_an\D2D_simulation\D2D_simulation\obj\Debug\netcoreapp3.1\D2D_simulation.csproj.CoreCompileInputs.cache
+A:\Du_an\D2D_simulation\D2D_simulation\obj\Debug\netcoreapp3.1\D2D_simulation.csproj.CopyComplete
+A:\Du_an\D2D_simulation_V1\D2D_simulation\bin\Debug\netcoreapp3.1\D2D_simulation.exe
+A:\Du_an\D2D_simulation_V1\D2D_simulation\bin\Debug\netcoreapp3.1\D2D_simulation.deps.json
+A:\Du_an\D2D_simulation_V1\D2D_simulation\bin\Debug\netcoreapp3.1\D2D_simulation.runtimeconfig.json
+A:\Du_an\D2D_simulation_V1\D2D_simulation\bin\Debug\netcoreapp3.1\D2D_simulation.runtimeconfig.dev.json
+A:\Du_an\D2D_simulation_V1\D2D_simulation\bin\Debug\netcoreapp3.1\D2D_simulation.dll
+A:\Du_an\D2D_simulation_V1\D2D_simulation\bin\Debug\netcoreapp3.1\D2D_simulation.pdb
+A:\Du_an\D2D_simulation_V1\D2D_simulation\bin\Debug\netcoreapp3.1\MathNet.Numerics.dll
+A:\Du_an\D2D_simulation_V1\D2D_simulation\obj\Debug\netcoreapp3.1\D2D_simulation.csprojAssemblyReference.cache
+A:\Du_an\D2D_simulation_V1\D2D_simulation\obj\Debug\netcoreapp3.1\D2D_simulation.AssemblyInfoInputs.cache
+A:\Du_an\D2D_simulation_V1\D2D_simulation\obj\Debug\netcoreapp3.1\D2D_simulation.AssemblyInfo.cs
+A:\Du_an\D2D_simulation_V1\D2D_simulation\obj\Debug\netcoreapp3.1\D2D_simulation.csproj.CoreCompileInputs.cache
+A:\Du_an\D2D_simulation_V1\D2D_simulation\obj\Debug\netcoreapp3.1\D2D_simulation.csproj.CopyComplete
+A:\Du_an\D2D_simulation_V1\D2D_simulation\obj\Debug\netcoreapp3.1\D2D_simulation.dll
+A:\Du_an\D2D_simulation_V1\D2D_simulation\obj\Debug\netcoreapp3.1\D2D_simulation.pdb
+A:\Du_an\D2D_simulation_V1\D2D_simulation\obj\Debug\netcoreapp3.1\D2D_simulation.genruntimeconfig.cache
